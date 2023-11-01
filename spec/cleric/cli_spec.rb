@@ -46,16 +46,10 @@ end
 
 module Cleric
   describe CLI do
-    def stub_options_for(obj, options)
-      # Thor classes access their options through the `option` method so the
-      # only option (pun intended) is to mock as follows.
-      obj.stub_chain(:options, :[]) { |opt| options[opt] }
-    end
-
-    let(:config) { mock('Config') }
-    let(:agent) { mock('GitHub').as_null_object }
-    let(:console) { mock(ConsoleAnnouncer) }
-    let(:hipchat) { mock(HipChatAnnouncer) }
+    let(:config) { double('Config') }
+    let(:agent) { double('GitHub').as_null_object }
+    let(:console) { double(ConsoleAnnouncer) }
+    let(:hipchat) { double(HipChatAnnouncer) }
 
     before(:each) do
       CLIConfigurationProvider.stub(:new) { config }
@@ -75,7 +69,7 @@ module Cleric
         ConsoleAnnouncer.should_receive(:new).with($stdout)
       end
       it 'creates a HipChat console decorating the console announcer' do
-        HipChatAnnouncer.should_receive(:new).with(config, console)
+        HipChatAnnouncer.should_receive(:new).with(config, console, agent.login)
       end
     end
 
@@ -93,11 +87,11 @@ module Cleric
 
       describe '#create' do
         let(:name) { 'example_name' }
-        let(:manager) { mock(RepoManager).as_null_object }
+        let(:manager) { double(RepoManager).as_null_object }
 
         before(:each) do
           RepoManager.stub(:new) { manager }
-          stub_options_for(repo, team: '1234', chatroom: 'my_room')
+          repo.options = { team: '1234', chatroom: 'my_room' }
         end
 
         after(:each) { repo.create(name) }
@@ -113,7 +107,7 @@ module Cleric
       end
 
       describe '#audit' do
-        let(:auditor) { mock(RepoAuditor).as_null_object }
+        let(:auditor) { double(RepoAuditor).as_null_object }
 
         before(:each) { RepoAuditor.stub(:new) { auditor } }
         after(:each) { repo.audit('my/repo') }
@@ -131,11 +125,12 @@ module Cleric
 
       describe '#update' do
         let(:name) { 'example_name' }
-        let(:manager) { mock(RepoManager).as_null_object }
+        let(:manager) { double(RepoManager).as_null_object }
+        let(:options) { { chatroom: 'my_room' } }
 
         before(:each) do
           RepoManager.stub(:new) { manager }
-          stub_options_for(repo, chatroom: 'my_room')
+          repo.options = options
         end
 
         after(:each) { repo.update(name) }
@@ -148,12 +143,20 @@ module Cleric
         it 'delegates creation to the manager' do
           manager.should_receive(:update).with(name, hash_including(chatroom: 'my_room'))
         end
+
+        context 'when given a team option' do
+          let(:options) { { chatroom: 'my_room', team: '1234' } }
+
+          it 'delegates creation to the manager' do
+            manager.should_receive(:update).with(name, hash_including(team: '1234'))
+          end
+        end
       end
     end
 
     describe User do
       subject(:user) { Cleric::User.new }
-      let(:manager) { mock(UserManager).as_null_object }
+      let(:manager) { double(UserManager).as_null_object }
 
       before(:each) do
         UserManager.stub(:new) { manager }
@@ -166,7 +169,7 @@ module Cleric
       end
 
       describe '#create' do
-        before(:each) { stub_options_for(user, team: '1234', email: 'me@example.com') }
+        before(:each) { user.options = { team: '1234', email: 'me@example.com' } }
         after(:each) { user.welcome('a_username') }
 
         include_examples :announcers
