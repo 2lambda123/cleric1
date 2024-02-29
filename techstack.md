@@ -3,10 +3,10 @@
 ## Tech Stack
 2lambda123/cleric1 is built on the following main stack:
 
-- [Ruby](https://www.ruby-lang.org) – Languages
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- [RSpec](https://rspec.info/) – Testing Frameworks
+- [Ruby](https://www.ruby-lang.org) – Languages
 - [Octokit](https://github.com/octokit/octokit.net) – Tools for GitHub
+- [RSpec](https://rspec.info/) – Testing Frameworks
 
 Full tech stack [here](/techstack.md)
 
@@ -16,10 +16,10 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 2lambda123/cleric1 is built on the following main stack:
 
-- <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/2539/logo.png' alt='RSpec'/> [RSpec](https://rspec.info/) – Testing Frameworks
+- <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/9827/octokit-dotnet_2.png' alt='Octokit'/> [Octokit](https://github.com/octokit/octokit.net) – Tools for GitHub
+- <img width='25' height='25' src='https://img.stackshare.io/service/2539/logo.png' alt='RSpec'/> [RSpec](https://rspec.info/) – Testing Frameworks
 
 Full tech stack [here](/techstack.md)
 
@@ -30,7 +30,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [2lambda123/cleric1](https://github.com/2lambda123/cleric1)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|11<br/>Tools used|01/09/24 <br/>Report generated|
+|11<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
